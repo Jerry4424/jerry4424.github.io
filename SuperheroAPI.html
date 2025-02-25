@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superhero Finder</title>
+    <link rel="stylesheet" href="SuperheroAPI.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Superhero Finder</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Enter exact superhero name">
+            <button id="searchButton">Search</button>
+        </div>
+        <div id="errorMessage"></div>
+        <div id="heroContainer"></div>
+    </div>
+
+    <script>
+        const API_URL = "https://superheroapi.com/api.php/bc2bab62ec890e14c9f0c3380020b474/search/";
+
+        document.getElementById("searchButton").addEventListener("click", () => {
+            const searchInput = document.getElementById("searchInput").value.trim();
+            const errorMessage = document.getElementById("errorMessage");
+            const heroContainer = document.getElementById("heroContainer");
+
+            errorMessage.textContent = "";
+            heroContainer.innerHTML = "";
+
+            if (!searchInput) {
+                errorMessage.textContent = "Please enter a superhero name!";
+                return;
+            }
+
+            if (!/^[a-zA-Z0-9 ]+$/.test(searchInput)) {
+                errorMessage.textContent = "Please enter a valid superhero name!";
+                return;
+            }
+
+            fetch(`${API_URL}${searchInput}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.response === "error") {
+                        errorMessage.textContent = "Superhero not found!";
+                        return;
+                    }
+
+                    if (!data.results || data.results.length === 0) {
+                        errorMessage.textContent = `No results found for "${searchInput}". Please try again.`;
+                        return;
+                    }
+
+                    const exactMatch = data.results.find(hero => hero.name.toLowerCase() === searchInput.toLowerCase());
+
+                    if (!exactMatch) {
+                        errorMessage.textContent = `No exact match found for "${searchInput}". Please enter the correct name.`;
+                        return;
+                    }
+
+                    displayHero(exactMatch);
+                })
+                .catch(() => {
+                    errorMessage.textContent = "There was an issue fetching data.";
+                });
+        });
+
+        function displayHero(hero) {
+            const heroContainer = document.getElementById("heroContainer");
+            heroContainer.innerHTML = `
+                <div class="hero-card">
+                    <h2>${hero.name}</h2>
+                    <img src="${hero.image.url}" alt="${hero.name}">
+                    <p><strong>Full Name:</strong> ${hero.biography["full-name"] || "Unknown"}</p>
+                    <div class="hero-stats">
+                        <p> Strength: ${hero.powerstats.strength || "N/A"}</p>
+                        <p> Speed: ${hero.powerstats.speed || "N/A"}</p>
+                        <p> Intelligence: ${hero.powerstats.intelligence || "N/A"}</p>
+                        <p> Power: ${hero.powerstats.power || "N/A"}</p>
+                        <p> Durability: ${hero.powerstats.durability || "N/A"}</p>
+                        <p> Combat: ${hero.powerstats.combat || "N/A"}</p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
