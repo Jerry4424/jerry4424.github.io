@@ -1,0 +1,190 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #1e1e1e; 
+    color: #f1f1f1; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+header {
+    background: #2a2a2a;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+header h1 {
+    margin-left: 20px;
+}
+
+
+nav {
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #3399ff; 
+}
+
+
+
+#about {
+    padding: 40px;
+    text-align: center;
+}
+
+#about h2 {
+    color: #3399ff; 
+    border-bottom: 2px solid #3399ff;
+    display: inline-block;
+}
+
+
+#about p {
+    max-width: 600px; 
+    margin: 0 auto;
+    text-align: left; 
+    line-height: 1.6;
+}
+
+
+#about ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px; 
+    margin: 20px auto; 
+    text-align: center;
+}
+
+#about ul li {
+    display: inline-block; 
+    background: #3a3a3a;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.project-card {
+    display: inline-block;
+    width: 300px;
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    text-align: center;
+    background: #2a2a2a;
+}
+
+.project-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.project-card a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #3399ff; 
+    text-decoration: none;
+}
+
+.project-card:hover {
+    background: #3a3a3a;
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+}
+
+
+form {
+    max-width: 400px;
+    margin: auto;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    color: #3399ff; 
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #3399ff;
+    border-radius: 5px;
+    background: #2a2a2a;
+    color: white;
+}
+
+button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background: #3399ff;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #1e7cd9;
+}
+
+
+footer {
+    background: #2a2a2a;
+    color: white;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        margin: 10px 0;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .project-card {
+        width: 100%;
+    }
+}
